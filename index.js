@@ -6,21 +6,21 @@ import path from "path";
 import { fileURLToPath } from "url";
 const app = express();
 app.use(
-  cors({ origin: ["http://localhost:5173", "https://farmer.sasyasystems.com"] })
+  cors({ origin: ["http://localhost:5173","https://celadon-panda-abf4e1.netlify.app", "https://farmer.sasyasystems.com"] })
 );
 
 const server = http.createServer(app);
 const io = new SocketIO(server, {
   cors: {
-    origin: ["http://localhost:5173", "https://farmer.sasyasystems.com"],
+    origin: ["http://localhost:5173","https://celadon-panda-abf4e1.netlify.app", "https://farmer.sasyasystems.com"],
   },
 });
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-console.log("thisisdirname", __dirname);
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// console.log("thisisdirname", __dirname);
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+// });
 const FARMER_ROOM = "farmerRoom";
 
 io.on("connection", (socket) => {
@@ -46,7 +46,7 @@ io.on("connection", (socket) => {
     console.log("User disconnected");
   });
   // Set CORS headers for Socket.IO
-  socket.handshake.headers.origin = "https://farmer.sasyasystems.com";
+  socket.handshake.headers.origin = "https://celadon-panda-abf4e1.netlify.app";
 });
 
 const PORT = 3001;
